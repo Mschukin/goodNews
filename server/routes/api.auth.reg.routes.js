@@ -89,3 +89,5 @@ router.get('/refresh', verifyRefreshToken, async (req, res) => {
     res.status(401).json({ message: error.message })
   }
 })
+
+module.exports = router

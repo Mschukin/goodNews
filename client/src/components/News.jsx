@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axiosInstance from "../axiosInstance";
+import NewsCard from "./newsCard";
 
 
 function News() {
@@ -7,18 +8,19 @@ function News() {
 useEffect(()=>{posts},[])
 
 async function posts() {
-    const {data} = await axiosInstance('/posts')
+    const {data} = await axiosInstance.get('/posts')
+    setNews(data)
 console.log(data);
 
 }
 
 
 
-    return (
-        <div>
-            news
-        </div>
-    );
+return (
+    <>
+    {news.map((news)=>(<NewsCard key = {news.id} news = {news} setNews={setNews}/>) )}
+    </>
+  );
 }
 
 export default News;

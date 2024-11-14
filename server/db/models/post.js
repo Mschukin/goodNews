@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   Post.init({
     title: {
       allowNull: false,
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING(1000),
     },
     description: {
       allowNull: false,
@@ -21,11 +21,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     url: {
       allowNull: false,
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING,
     },
     image: {
       allowNull: false,
-      type: DataTypes.TEXT,
+      type: DataTypes.STRING,
     },
     user_id: {
       allowNull: false,

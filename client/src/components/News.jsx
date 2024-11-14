@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axiosInstance from "../axiosInstance";
 
 
-function News() {
+export default function News(user) {
     const[news,setNews] = useState([])
 useEffect(()=>{posts},[])
 
@@ -12,13 +12,9 @@ console.log(data);
 
 }
 
-
-
     return (
         <div>
             news
         </div>
     );
 }
-
-export default News;

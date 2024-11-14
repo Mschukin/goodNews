@@ -1,43 +1,46 @@
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-import Nav from "./components/Nav";
 import { useEffect, useState } from "react";
 import Layout from "./components/Layout";
 
-
-
 import axiosInstance, { setAccessToken } from "./axiosInstance";
-import Reg from "./components/Reg";
-import Auth from "./components/Auth";
+import Registration from "./components/AuthReg/Registration";
+import Authorization from "./components/Auth";
 import News from "./components/News";
-
 
 export default function App() {
   const [user, setUser] = useState({});
   console.log(user);
 
+  const checkUserStatus = async () => {
+    try {
+      const responce = axiosInstance.get("/auth/refresh")
+      if (responce.status === 200) {
+        setUser(responce.data.user);
+        setAccessToken(responce.data.accessToken);
+      }
+    } catch ({responce}) {
+      return responce.data.message
+    }
+  }
+
   useEffect(() => {
     // при монтирование (загрузка страницы)
-    axiosInstance.get("/auth/refresh").then(({ data }) => {
-      setUser(data.user);
-      setAccessToken(data.accessToken);
-    });
+    checkUserStatus()
   }, []);
 
-  console.log("Наш пользователь", user);
 
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Layout user={user} setUser={setUser} />,
+      element: <Layout user={ user } setUser={ setUser } />,
       children: [
-
         {
           path: "/registration",
-          element: <Reg />,
+          element: <Registration setUser={setUser} />,
         },
         {
           path: "/authorization",
-          element: <Auth setUser={setUser} />,
+          element: <Authorization setUser={ setUser } />,
         },
         {
           path: "/news",

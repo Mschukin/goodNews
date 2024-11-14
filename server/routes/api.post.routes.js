@@ -1,3 +1,5 @@
 const {
-  getAllPosts,
+  getAllPostsController,
 } = require('../controllers/PostController')
+
+const verifyAccessToken = require()

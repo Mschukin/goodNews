@@ -21,6 +21,7 @@ export default function Registration({ setUser }) {
           email,
           password,
         })
+        console.log(response)
         if (response.status === 201) {
           setEmail('')
           setPassword('')
@@ -67,7 +68,7 @@ export default function Registration({ setUser }) {
           className="registration-form__input"
         />
         <button type="submit">
-          Создать в учетную запись
+          Создать учетную запись
         </button>
         </form>
     </div>)

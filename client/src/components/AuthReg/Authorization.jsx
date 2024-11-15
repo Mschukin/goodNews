@@ -27,7 +27,7 @@ export default function Authorization({ setUser }) {
         setAccessToken(response.data.accessToken);        
         setUser(response.data.user)
         setError(null)
-        navigate('/news')
+        navigate('/')
         return
       }
     } catch (error) {

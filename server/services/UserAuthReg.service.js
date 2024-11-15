@@ -10,12 +10,17 @@ module.exports = class UserAuthRegService {
     }
   }
 
-  static async getUserByEmail({ email }) {
+  static async getUserByEmail( email ) {
     try {
+      
+      
       const user = await User.findOne({ where: { email } })
-      return newUser ? newUser.get() : null 
+      // console.log(user);
+      console.log(email);
+      return user ? user.get() : null 
     } catch (error) {
       throw new Error(error)
     }
   }
 }
+

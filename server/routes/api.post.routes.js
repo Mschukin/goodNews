@@ -1,10 +1,10 @@
-const router = require('express').Router()
+// const router = require('express').Router()
 
-const {
-  getAllPostsController,
-} = require('../controllers/PostController')
+// const {
+//   getAllPostsController,
+// } = require('../controllers/PostController')
 
-const verifyAccessToken = require()
+// const verifyAccessToken = require()
 
-module.exports = router
+// module.exports = router
 

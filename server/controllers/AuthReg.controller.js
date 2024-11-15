@@ -6,24 +6,27 @@ const generateTokens = require('../utils/generateTokens')
 const UserAuthRegService = require('../services/UserAuthReg.service')
 
 exports.userRegistrationController = async (req, res) => {
+
   try {
     const { email, password } = req.body
+    
     if (email.trim === '' || password.trim() === '') {
       console.log('Please, fill the fields');
       return res.status(400).json({ message: 'Please, fill the fields' })
     }
-
+  
     let user = await UserAuthRegService.getUserByEmail(email)
-
+  
     if (!user) {
       user = await UserAuthRegService.addUser({
         email, 
         password: await bcrypt.hash(password, 10)
       })
 
+
       delete user.password
       res.locals.user = user
-
+      console.log(111111, user);
       const { accessToken, refreshToken } = generateTokens({ user })
       res.status(201).cookie(jwtConfig.refresh.type, refreshToken, {
         httpOnly: true,

@@ -1,10 +1,10 @@
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Layout from "./components/Layout";
 
 import axiosInstance, { setAccessToken } from "./axiosInstance";
 import Registration from "./components/AuthReg/Registration";
-import Authorization from "./components/Auth";
+import Authorization from "./components/AuthReg/Authorization";
 import News from "./components/News";
 
 export default function App() {

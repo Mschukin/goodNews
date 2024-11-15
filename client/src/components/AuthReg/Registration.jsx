@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { axiosInstance, setAccessToken } from "../../axiosInstance";
+import axiosInstance, { setAccessToken } from "../../axiosInstance";
 
-export default function Registration({ user, setUser }) {
-  const { setUser } = useState(null)
-  const { email, setEmail } = useState('')
-  const { password, setPassword } = useState('')
-  const { check, setCheck } = useState('')
-  const { error, setError } = useState(null)
+export default function Registration({ setUser }) {
+  const [ email, setEmail ] = useState('')
+  const [ password, setPassword ] = useState('')
+  const [ check, setCheck ] = useState('')
+  const [ error, setError ] = useState(null)
   const navigate = useNavigate()
 
   const regSubmitHandle = async (event) => {
@@ -18,19 +17,19 @@ export default function Registration({ user, setUser }) {
         return
       }
       if (password === check) {
-        const responce = await axiosInstance.post('/auth/registration', {
+        const response = await axiosInstance.post('/auth/registration', {
           email,
           password,
         })
-      }
-      if (responce.status === 201) {
-        setEmail('')
-        setPassword('')
-        setAccessToken(responce.data.accessToken)
-        setUser(responce.data.user)
-        setError(null)
-        navigate('/news')
-        return
+        if (response.status === 201) {
+          setEmail('')
+          setPassword('')
+          setAccessToken(response.data.accessToken)
+          setUser(response.data.user)
+          setError(null)
+          navigate('/news')
+          return
+        }
       }
       setError("The passwords don't match")
     } catch (error) {

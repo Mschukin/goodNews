@@ -3,7 +3,7 @@ import axiosInstance from "../axiosInstance";
 import NewsCard from "./newsCard";
 
 
-export default function News(user) {
+export default function News() {
     const[news,setNews] = useState([])
 useEffect(()=>{posts},[])
 
@@ -20,3 +20,4 @@ return (
     </>
   );
 
+}

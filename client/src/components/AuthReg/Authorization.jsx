@@ -1,7 +1,6 @@
-import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { axiosInstance, setAccessToken } from "../../axiosInstance";
+import axiosInstance, { setAccessToken } from "../../axiosInstance";
 
 export default function Authorization({ setUser }) {
   const [email, setEmail] = useState("");
@@ -17,16 +16,16 @@ export default function Authorization({ setUser }) {
         return
       }
 
-      const responce = await axiosInstance.post('/auth/authorization', {
+      const response = await axiosInstance.post('/auth/authorization', {
         email,
         password
       })
 
-      if (responce.status === 200) {
+      if (response.status === 200) {
         setEmail('')
         setPassword('')
         setAccessToken(response.data.accessToken);        
-        setUser(responce.data.user)
+        setUser(response.data.user)
         setError(null)
         navigate('/news')
         return

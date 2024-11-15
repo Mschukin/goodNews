@@ -11,7 +11,7 @@ class PostController {
         const apiKey = 'c7917b92dd944ac78217f1fa5d23ea58'; 
         const authUser = res.locals.user
         try {
-            const response = await axios.get(`https://newsapi.org/v2/everything?q=${encodeURIComponent(searchQuery)}&language=ru&pageSize=3&apiKey=${apiKey}`);
+            const response = await axios.get(`https://newsapi.org/v2/everything?q=${encodeURIComponent(searchQuery)}&language=ru&pageSize=10&apiKey=${apiKey}`);
             console.log(response.data.articles);
             
             const postItems = response.data.articles.map(article => ({

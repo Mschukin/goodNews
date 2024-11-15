@@ -5,21 +5,21 @@ import Layout from "./components/Layout";
 import axiosInstance, { setAccessToken } from "./axiosInstance";
 import Registration from "./components/AuthReg/Registration";
 import Authorization from "./components/AuthReg/Authorization";
-import News from "./components/News";
+import Posts from "./components/Posts";
 
 export default function App() {
-  const [user, setUser] = useState({});
-  console.log(user);
+  const [user, setUser] = useState(null);
+  // console.log(user);
 
   const checkUserStatus = async () => {
     try {
-      const responce = axiosInstance.get("/auth/refresh")
-      if (responce.status === 200) {
-        setUser(responce.data.user);
-        setAccessToken(responce.data.accessToken);
+      const response = await axiosInstance.get("/auth/refresh")
+      if (response.status === 200) {
+        setUser(response.data.user);
+        setAccessToken(response.data.accessToken);
       }
-    } catch ({responce}) {
-      return responce.data.message
+    } catch ({response}) {
+      return response.data.message
     }
   }
 
@@ -43,8 +43,8 @@ export default function App() {
           element: <Authorization setUser={ setUser } />,
         },
         {
-          path: "/news",
-          element: <News user={user} />,
+          path: "/posts",
+          element: <Posts user={user} />,
         },
       ],
     },

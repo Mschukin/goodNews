@@ -10,7 +10,7 @@ exports.userRegistrationController = async (req, res) => {
   try {
     const { email, password } = req.body
     
-    if (email.trim === '' || password.trim() === '') {
+    if (email.trim() === '' || password.trim() === '') {
       console.log('Please, fill the fields');
       return res.status(400).json({ message: 'Please, fill the fields' })
     }
@@ -26,7 +26,6 @@ exports.userRegistrationController = async (req, res) => {
 
       delete user.password
       res.locals.user = user
-      console.log(111111, user);
       const { accessToken, refreshToken } = generateTokens({ user })
       res.status(201).cookie(jwtConfig.refresh.type, refreshToken, {
         httpOnly: true,
@@ -55,7 +54,7 @@ exports.userAuthorizationController = async (req, res) => {
         res.locals.user = user
 
         const { accessToken, refreshToken } = generateTokens({ user })
-        res.status(201).cookie(jwtConfig.refresh.type, refreshToken, {
+        res.status(200).cookie(jwtConfig.refresh.type, refreshToken, {
           httpOnly: true,
           maxAge: jwtConfig.refresh.expiresIn,
         }).json({ message: 'success', user, accessToken })

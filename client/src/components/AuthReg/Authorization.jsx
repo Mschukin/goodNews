@@ -21,13 +21,16 @@ export default function Authorization({ setUser }) {
         password
       })
 
+      console.log(response);
+      
+
       if (response.status === 200) {
         setEmail('')
         setPassword('')
         setAccessToken(response.data.accessToken);        
         setUser(response.data.user)
         setError(null)
-        navigate('/')
+        navigate('/posts')
         return
       }
     } catch (error) {

@@ -49,7 +49,7 @@ export default function Registration({ setUser }) {
           value={ email }
           onChange={(event) => setEmail(event.target.value)}
           placeholder="Enter your email"
-          className="registration-form__input"
+          className="registration-form__input mx-2"
         />
         <input
           type="password"
@@ -57,7 +57,7 @@ export default function Registration({ setUser }) {
           minLength={3}
           onChange={(event) => setPassword(event.target.value)}
           placeholder="Enter your password"
-          className="registration-form__input"
+          className="registration-form__input mx-2"
         />
         <input
           type="password"
@@ -65,11 +65,19 @@ export default function Registration({ setUser }) {
           minLength={3}
           onChange={(event) => setCheck(event.target.value)}
           placeholder="Repeat your password"
-          className="registration-form__input"
+          className="registration-form__input mx-2"
         />
-        <button type="submit">
+
+
+
+        <div>
+
+        <button type="submit" className="btn btn-primary btn-lg mt-2 mx-2">
           Создать учетную запись
         </button>
+
+        </div>
+
         </form>
     </div>)
 }

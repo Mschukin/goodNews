@@ -22,7 +22,7 @@ function Nav({ user, setUser }) {
 
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
-          <Link to={"/"} className="nav-link active mx-2" aria-current="page">
+          <Link to={"/"} className="nav-link active mx-5" aria-current="page">
             <h1>GoodNews</h1>
           </Link>
           <button
@@ -42,7 +42,7 @@ function Nav({ user, setUser }) {
                 <li className="nav-item">
                 <Link
                   to={"/registration"}
-                  className="nav-link active"
+                  className="nav-link active mx-2"
                   aria-current="page"
                 >
                   <h3>Регистрация</h3>
@@ -62,7 +62,7 @@ function Nav({ user, setUser }) {
               </li>
               )}
               {user?.email && (
-                <li className="nav-item">
+                <li className="nav-item mx-5">
                 <Link
                   to={"/news"}
                   className="nav-link active"
@@ -75,8 +75,8 @@ function Nav({ user, setUser }) {
             </ul>
             {user && (
               <>
-                <li className="nav-item">Привет , {user?.email}</li>
-                <button className="nav-item btn btn-danger" onClick={logout}>
+                <li className="nav mx-5">Привет , {user?.email}</li>
+                <button className="nav-item btn btn-danger mx-5" onClick={logout}>
                   Выйти
                 </button>
               </>

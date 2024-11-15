@@ -49,7 +49,7 @@ export default function Authorization({ setUser }) {
           value={ email }
           onChange={(event) => setEmail(event.target.value)}
           placeholder="Enter your email"
-          className="registration-form__input"
+          className="registration-form__input mx-2"
         />
         <input
           type="password"
@@ -59,9 +59,12 @@ export default function Authorization({ setUser }) {
           placeholder="Enter your password"
           className="registration-form__input"
         />
-        <button type="submit" className="btn btn-primary btn-lg mt-5">
+        <div>
+        <button type="submit" className="btn btn-primary btn-lg mt-2 mx-2">
           Войти в учетную запись
         </button>
+        </div>
+
     </form>
     </div>
   );

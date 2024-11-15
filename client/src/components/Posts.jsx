@@ -38,7 +38,7 @@ function Posts() {
           type="text"
           value={searchQuery}
           onChange={(event) => setSearchQuery(event.target.value)}
-          placeholder="Enter your email"
+          placeholder="Запрос"
           className="registration-form__input"
         />
         <input
@@ -46,12 +46,17 @@ function Posts() {
           value={excludeWords}
           minLength={3}
           onChange={(event) => setExcludeWords(event.target.value)}
-          placeholder="Enter your password"
-          className="registration-form__input"
+          placeholder="Исключить"
+          className="registration-form__input mx-2"
         />
-        <button onChange={()=>setIsTrue((prev)=>!prev)} onClick={getFilteredPosts} className="btn btn-primary btn-lg mt-5">
-          find
+
+<div>
+<button onChange={()=>setIsTrue((prev)=>!prev)} onClick={getFilteredPosts} className="btn btn-primary btn-md mt-3 mb-5">
+          Отправить запрос
         </button>
+</div>
+
+
         {posts.map((posts) => (
           <PostsCard key={posts.id} posts={posts} setPosts={setPosts} />
         ))}

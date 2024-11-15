@@ -12,10 +12,13 @@ function Nav() {
     <div className="collapse navbar-collapse" id="navbarNav">
       <ul className="navbar-nav">
         <li className="nav-item">
-        <Link to={'/news'} className="nav-link active" aria-current="page" ><h3>Новости</h3></Link>
+        <Link to={'/registration'} className="nav-link active" aria-current="page" ><h3>Регистрация</h3></Link>
         </li>
         <li className="nav-item">
-        <Link to={'/registration'} className="nav-link active" aria-current="page" ><h3>Регистрация</h3></Link>
+        <Link to={'/authorization'} className="nav-link active" aria-current="page" ><h3>Авторизация</h3></Link>
+        </li>
+        <li className="nav-item">
+        <Link to={'/news'} className="nav-link active" aria-current="page" ><h3>Новости</h3></Link>
         </li>
       </ul>
       {/* {user?.email&&( */}

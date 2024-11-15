@@ -1,10 +1,13 @@
-// const router = require('express').Router()
+const {
+  getAllPostsController,
+  getFilteredPostsController,
+} = require('../controllers/PostController')
 
-// const {
-//   getAllPostsController,
-// } = require('../controllers/PostController')
+const router = require('express').Router()
+const verifyRefreshToken = require('../middleware/verifyRefreshToken')
 
-// const verifyAccessToken = require()
+router.get('/', getAllPostsController)
+router.post('/filtered', getFilteredPostsController)
 
-// module.exports = router
+module.exports = router
 

@@ -1,20 +1,25 @@
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../axiosInstance";
+import { useEffect } from "react";
+
 
 function Nav({ user, setUser }) {
   const navigate = useNavigate();
 
-  async function logout() {
+   const logout = async () => {
     const response = await axiosInstance.delete("/auth/logout");
-
-    if (response.status === 200) {
-      setUser({});
+    console.log(response);
+    
+    if (response.status === 204) {
+      setUser(null);
       navigate("/");
+      return
     }
   }
 
   return (
     <div>
+
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
           <Link to={"/"} className="nav-link active mx-2" aria-current="page">
@@ -33,7 +38,8 @@ function Nav({ user, setUser }) {
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
-              <li className="nav-item">
+              {!user?.email && (
+                <li className="nav-item">
                 <Link
                   to={"/registration"}
                   className="nav-link active"
@@ -42,16 +48,21 @@ function Nav({ user, setUser }) {
                   <h3>Регистрация</h3>
                 </Link>
               </li>
-              <li className="nav-item">
+              )}
+              {!user?.email && (
+                <li className="nav-item">
                 <Link
                   to={"/authorization"}
                   className="nav-link active"
                   aria-current="page"
                 >
+                  
                   <h3>Авторизация</h3>
                 </Link>
               </li>
-              <li className="nav-item">
+              )}
+              {user?.email && (
+                <li className="nav-item">
                 <Link
                   to={"/news"}
                   className="nav-link active"
@@ -60,8 +71,9 @@ function Nav({ user, setUser }) {
                   <h3>Новости</h3>
                 </Link>
               </li>
+              )}
             </ul>
-            {user?.email && (
+            {user && (
               <>
                 <li className="nav-item">Привет , {user?.email}</li>
                 <button className="nav-item btn btn-danger" onClick={logout}>

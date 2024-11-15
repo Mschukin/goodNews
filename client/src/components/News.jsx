@@ -3,7 +3,7 @@ import axiosInstance from "../axiosInstance";
 import NewsCard from "./newsCard";
 
 
-function News() {
+export default function News(user) {
     const[news,setNews] = useState([])
 useEffect(()=>{posts},[])
 
@@ -14,13 +14,9 @@ console.log(data);
 
 }
 
-
-
 return (
     <>
     {news.map((news)=>(<NewsCard key = {news.id} news = {news} setNews={setNews}/>) )}
     </>
   );
-}
 
-export default News;

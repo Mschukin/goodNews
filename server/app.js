@@ -4,7 +4,7 @@ const serverConfig = require('./config/serverConfig');
 const indexRouter = require('./routes/index.routes');
 
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3000;
 
 // конфигурация сервера
 serverConfig(app)

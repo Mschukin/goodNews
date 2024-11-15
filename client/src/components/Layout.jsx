@@ -1,9 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Nav from "./Nav";
-import Auth from "./Auth";
 
-function Layout({user,setUser}) {
-
+export default function Layout({ user, setUser}) {
 
   return (
     <>
@@ -14,5 +12,3 @@ function Layout({user,setUser}) {
     </>
   )
 }
-
-export default Layout;

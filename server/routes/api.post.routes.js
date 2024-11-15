@@ -1,9 +1,10 @@
 const router = require('express').Router()
 
-
 const {
-  getAllPosts,
+  getAllPostsController,
 } = require('../controllers/PostController')
 
+const verifyAccessToken = require()
 
 module.exports = router
+

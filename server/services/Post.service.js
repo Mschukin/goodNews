@@ -3,13 +3,40 @@ const { Op } = require('sequelize')
 
 
 module.exports = class PostService {
-  static async getAllPosts() {
+  
+  static async getFilteredPosts() {
     try {
-      
+      const posts = await Post.findAll({
+
+      })
     } catch (error) {
       throw new Error(error)
     }
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // --------------------------------------------------------------------
+  static async getAllPosts() {
+    try {
+      const posts = (await Post.findAll()).map((el) => el.get())
+      return posts ? posts : null
+    } catch (error) {
+      throw new Error(error)
+    }
+  }
+
 
   static async getOnePost() {
     try {

@@ -2,33 +2,27 @@ import { useEffect, useState } from "react";
 import axiosInstance from "../axiosInstance";
 import PostsCard from "./PostsCard";
 
-function Posts() {
+function Posts({ user }) {
   const [posts, setPosts] = useState([]);
   const [searchQuery, setSearchQuery] = useState([]);
   const [excludeWords, setExcludeWords] = useState([]);
   const [isTrue, setIsTrue] = useState(false);
 
-
-
-  async function getPosts(event) {
-    event.preventDefault();
-    const { data } = await axiosInstance.get("/posts");
-        console.log(data);
-    setPosts(data.posts);
-
-  }
+  console.log(user.id);
 
   async function getFilteredPosts(event) {
     event.preventDefault();
-    const { data } = await axiosInstance.post("/posts/filtered", { searchQuery, excludeWords });
-        console.log(data);
-    setPosts(data.posts);
-
+    const { data } = await axiosInstance.post("/news", {
+      searchQuery: searchQuery,
+      excludeWords: excludeWords,
+      id: user.id,
+    });
+    console.log(data);
+    setPosts(data);
   }
 
   useEffect(() => {
-    getPosts();
-    
+    getFilteredPosts();
   }, [isTrue]);
 
   return (
@@ -50,16 +44,21 @@ function Posts() {
           className="registration-form__input mx-2"
         />
 
-<div>
-<button onChange={()=>setIsTrue((prev)=>!prev)} onClick={getFilteredPosts} className="btn btn-primary btn-md mt-3 mb-5">
-          Отправить запрос
-        </button>
-</div>
+        <div>
+          <button
+            onChange={() => setIsTrue((prev) => !prev)}
+            onClick={getFilteredPosts}
+            className="btn btn-primary btn-md mt-3 mb-5"
+          >
+            Отправить запрос
+          </button>
+        </div>
 
-
-        {posts.map((posts) => (
-          <PostsCard key={posts.id} posts={posts} setPosts={setPosts} />
-        ))}
+        <div className="d-flex flex-wrap justify-content-start p-2">
+          {posts.map((posts) => (
+            <PostsCard key={posts.id} posts={posts} setPosts={setPosts} />
+          ))}
+        </div>
       </form>
     </>
   );

@@ -64,7 +64,7 @@ function Nav({ user, setUser }) {
               {user?.email && (
                 <li className="nav-item mx-5">
                 <Link
-                  to={"/news"}
+                  to={"/posts"}
                   className="nav-link active"
                   aria-current="page"
                 >

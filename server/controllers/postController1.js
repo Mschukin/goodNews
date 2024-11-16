@@ -3,32 +3,56 @@ const { Post } = require("../db/models");
 const { Op } = require("sequelize");
 
 class PostController {
+  async searchPost(req, res) {
+    const { searchQuery, excludeWords, id } = req.body;
 
-    async searchPost(req, res) {
-        const { searchQuery, excludeWords } = req.body;
-        console.log(req.body);
-        
-        const apiKey = 'c7917b92dd944ac78217f1fa5d23ea58'; 
-        const authUser = res.locals.user
-        try {
-            const response = await axios.get(`https://newsapi.org/v2/everything?q=${encodeURIComponent(searchQuery)}&language=ru&pageSize=10&apiKey=${apiKey}`);
-            console.log(response.data.articles);
-            
-            const postItems = response.data.articles.map(article => ({
-                title: article.title,
-                description: article.description,
-                url: article.url,
-                image: article.urlToImage,
-                user_id: 3//authUser.id
-            }));
+    const apiKey = "c7917b92dd944ac78217f1fa5d23ea58";
+    console.log(id);
 
+    try {
+      const response = await axios.get(
+        `https://newsapi.org/v2/everything?q=${encodeURIComponent(
+          searchQuery
+        )}&language=ru&pageSize=10&apiKey=${apiKey}`
+      );
+      console.log("API Response:", response.data.articles);
+
+      const postItems = response.data.articles
+        .filter((article) => article.urlToImage)
+        .map((article) => ({
+          title: article.title,
+          description: article.description,
+          url: article.url,
+          image: article.urlToImage,
+          user_id: id,
+        }));
 
       if (postItems.length === 0) {
         console.log("No Post items found");
         return res.status(404).json({ message: "No Post items found" });
       }
 
-      await Post.bulkCreate(postItems);
+      const existingUrls = await Post.findAll({
+        attributes: ["url"],
+        where: {
+          url: {
+            [Op.in]: postItems.map((item) => item.url),
+          },
+        },
+      });
+
+      const existingUrlsSet = new Set(existingUrls.map((post) => post.url));
+
+      const uniquePostItems = postItems.filter(
+        (item) => !existingUrlsSet.has(item.url)
+      );
+
+      if (uniquePostItems.length > 0) {
+        console.log("Unique Post Items:", uniquePostItems);
+        await Post.bulkCreate(uniquePostItems);
+      } else {
+        console.log("All Post items are duplicates");
+      }
 
       const excludeWordsArray = excludeWords
         .split(" ")
@@ -52,6 +76,8 @@ class PostController {
           ],
         },
       });
+
+      console.log("Filtered Posts:", filteredPost);
 
       res.json(filteredPost);
     } catch (error) {

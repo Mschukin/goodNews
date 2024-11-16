@@ -6,7 +6,7 @@ module.exports = class PostService {
   static async getAllPosts() {
     try {
       const posts = await Post.findAll()
-      // console.log(posts);
+
       return posts 
     } catch (error) {
       throw new Error(error)

@@ -28,7 +28,7 @@ export default function Registration({ setUser }) {
           setAccessToken(response.data.accessToken)
           setUser(response.data.user)
           setError(null)
-          navigate('/news')
+          navigate('/posts')
           return
         }
       }

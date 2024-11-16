@@ -22,7 +22,6 @@ module.exports = {
         type: Sequelize.TEXT
       },
       image: {
-        allowNull: false,
         type: Sequelize.TEXT
       },
       user_id: {

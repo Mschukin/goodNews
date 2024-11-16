@@ -7,6 +7,8 @@ function verifyAccessToken(req, res, next) {
 
     res.locals.user = user;
 
+    
+
     next();
   } catch (error) {
     console.log(error);

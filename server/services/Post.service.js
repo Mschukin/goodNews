@@ -45,6 +45,28 @@ module.exports = class PostService {
       throw new Error(error)
     }
   }
+
+  static async getPostById(id) {
+    try {
+      const post = await Post.findOne({ where: { id } });
+      return post ? post.get() : null;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  static async deletePostByUser(id, userId) {
+    try {
+      const post = await Post.findOne({ where: { id, userId } });
+      if (post) {
+        return post.destroy();
+      }
+      return null;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
 }
 
 
